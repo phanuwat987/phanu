@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopVincent</title>
+    <title>ShopVincent - Modern</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4a6fa5;
+            --primary-color: #5b7db1;
             --primary-dark: #3a5a80;
-            --secondary-color: #ff6b6b;
-            --accent-color: #4ecdc4;
+            --secondary-color: #ff7c7c;
+            --accent-color: #56d8d1;
             --dark-color: #2d3e50;
-            --light-color: #f8f9fa;
+            --light-color: #f9fafb;
             --text-color: #333;
             --gray-light: #e9ecef;
-            --success-color: #28a745;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --transition: all 0.3s ease;
-            --border-radius: 12px;
+            --success-color: #2ecc71;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            --gradient-reverse: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
         }
         
         * {
@@ -42,52 +44,70 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background-color: white;
+            padding: 20px 5%;
+            background-color: rgba(255, 255, 255, 0.95);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         
         .logo {
             display: flex;
             align-items: center;
             cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateY(-3px);
         }
         
         .logo img {
-            height: 45px;
-            margin-right: 12px;
-            border-radius: 8px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
         
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
         
         .demo-notice {
-            padding: 10px 15px;
-            background-color: var(--accent-color);
+            padding: 12px 20px;
+            background: var(--gradient);
             color: white;
-            border-radius: var(--border-radius);
+            border-radius: 50px;
             font-weight: 500;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .demo-notice:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
         
         /* ส่วนหมวดหมู่ */
         .categories {
             display: flex;
-            height: calc(100vh - 80px);
+            min-height: 100vh;
         }
         
         .category {
@@ -98,6 +118,7 @@
             align-items: center;
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
             transition: var(--transition);
@@ -113,27 +134,31 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
             transition: var(--transition);
         }
         
         .category:hover:before {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
         }
         
         .category:hover {
-            transform: scale(1.03);
+            flex: 1.2;
         }
         
         .category-content {
             position: relative;
             z-index: 1;
-            padding: 30px;
+            padding: 40px;
             max-width: 80%;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.3s;
         }
         
         .category h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: 1px;
@@ -142,13 +167,13 @@
         
         .category p {
             margin-bottom: 30px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
         
         .category button {
-            padding: 15px 40px;
+            padding: 16px 45px;
             background-color: transparent;
             color: white;
             border: 2px solid white;
@@ -159,6 +184,23 @@
             transition: var(--transition);
             letter-spacing: 1px;
             text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .category button:hover:before {
+            left: 100%;
         }
         
         .category button:hover {
@@ -169,45 +211,47 @@
         }
         
         .category-left {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
         }
         
         .category-right {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
         }
         
         /* หน้าสินค้า */
         .products-page {
             display: none;
-            padding: 40px 5%;
-            min-height: calc(100vh - 80px);
+            padding: 60px 5%;
+            min-height: 100vh;
+            background: var(--light-color);
         }
         
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
         
         .back-button {
             display: flex;
             align-items: center;
-            background: var(--light-color);
+            background: white;
             border: none;
             color: var(--primary-color);
             font-size: 1.1rem;
             cursor: pointer;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: var(--border-radius);
             transition: var(--transition);
             box-shadow: var(--shadow);
         }
         
         .back-button:hover {
-            background: var(--primary-color);
+            background: var(--gradient);
             color: white;
             transform: translateX(-5px);
+            box-shadow: var(--shadow-hover);
         }
         
         .back-button i {
@@ -215,7 +259,7 @@
         }
         
         .page-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--dark-color);
             text-align: center;
             flex-grow: 1;
@@ -226,19 +270,19 @@
         .page-title:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 3px;
         }
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
         }
         
         .product-card {
@@ -251,19 +295,25 @@
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
             box-shadow: var(--shadow-hover);
         }
         
+        .product-image-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
         .product-image {
-            height: 220px;
+            height: 100%;
             width: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
         .product-info {
@@ -271,14 +321,14 @@
         }
         
         .product-name {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 12px;
             color: var(--dark-color);
             font-weight: 600;
         }
         
         .product-price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--primary-color);
             font-weight: 700;
             margin-bottom: 20px;
@@ -286,8 +336,8 @@
         
         .view-details {
             width: 100%;
-            padding: 12px;
-            background-color: var(--accent-color);
+            padding: 15px;
+            background: var(--gradient);
             color: white;
             border: none;
             border-radius: var(--border-radius);
@@ -298,23 +348,124 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .view-details:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+        
+        .view-details:hover:before {
+            left: 100%;
         }
         
         .view-details:hover {
-            background-color: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 5% 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .categories {
+                flex-direction: column;
+            }
+            
+            .category {
+                min-height: 60vh;
+            }
+            
+            .category:hover {
+                flex: 1;
+            }
+        }
+        
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 padding: 15px;
+                gap: 15px;
             }
             
             .logo {
-                margin-bottom: 15px;
+                margin-bottom: 0;
             }
             
             .header-actions {
@@ -322,45 +473,64 @@
                 justify-content: center;
             }
             
-            .categories {
+            .page-header {
                 flex-direction: column;
-                height: auto;
+                gap: 20px;
+                text-align: center;
             }
             
-            .category {
-                min-height: 50vh;
+            .page-title {
+                font-size: 2.2rem;
             }
             
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
             }
             
-            .product-image {
-                height: 180px;
+            .product-image-container {
+                height: 200px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-icons {
+                justify-content: center;
             }
         }
         
         @media (max-width: 480px) {
             .logo h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .demo-notice {
                 font-size: 0.9rem;
-                padding: 8px 12px;
+                padding: 10px 15px;
             }
             
             .category h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .category p {
+                font-size: 1.1rem;
             }
             
             .category button {
-                padding: 12px 30px;
+                padding: 14px 35px;
             }
             
             .page-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .products-grid {
@@ -368,14 +538,19 @@
             }
         }
         
-        /* Animation */
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .product-card {
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
         }
         
         .product-card:nth-child(2) { animation-delay: 0.1s; }
@@ -383,6 +558,24 @@
         .product-card:nth-child(4) { animation-delay: 0.3s; }
         .product-card:nth-child(5) { animation-delay: 0.4s; }
         .product-card:nth-child(6) { animation-delay: 0.5s; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
     </style>
 </head>
 <body>
@@ -394,7 +587,7 @@
         
         <div class="header-actions">
             <div class="demo-notice">
-                <i class="fas fa-info-circle"></i> ตัวอย่างสินค้าเท่านั้น
+                <i class="fas fa-store"></i> ตัวอย่างสินค้าเท่านั้น
             </div>
         </div>
     </header>
@@ -403,7 +596,7 @@
         <div class="category category-left" data-category="home">
             <div class="category-content">
                 <h2>Home Products</h2>
-                <p>ตกแต่งบ้านตามใจคุณ</p>
+                <p>ตกแต่งบ้านตามใจคุณด้วยสินค้าคุณภาพ</p>
                 <button>View Products</button>
             </div>
         </div>
@@ -420,7 +613,7 @@
     <section class="products-page" id="homeProductsPage">
         <div class="page-header">
             <button class="back-button" onclick="goBackToCategories()">
-                <i class="fas fa-arrow-left"></i> Back to First Page
+                <i class="fas fa-arrow-left"></i> Back to Home
             </button>
             <h2 class="page-title">สินค้าตกแต่งบ้าน</h2>
             <div></div>
@@ -446,24 +639,56 @@
         </div>
     </section>
 
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <p>ShopVincent เป็นเว็บไซต์ตัวอย่างสำหรับแสดงสินค้า ไม่มีระบบซื้อขายใดๆ ทั้งสิ้น</p>
+                <p>สร้างขึ้นเพื่อวัตถุประสงค์ในการแสดงผลเท่านั้น</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ติดต่อเรา</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 ถนนตัวอย่าง กรุงเทพ</p>
+                <p><i class="fas fa-phone"></i> 012-345-6789</p>
+                <p><i class="fas fa-envelope"></i> info@shopvincent.example</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ติดตามเรา</h3>
+                <p>ติดตามเราบนโซเชียลมีเดียเพื่อรับข่าวสารล่าสุด</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 ShopVincent. All rights reserved. (Demo Only)</p>
+        </div>
+    </footer>
+
     <script>
         // ข้อมูลสินค้า
         const products = {
             home: [
-                { id: 1, name: "Nid", price: 1000000, image: "https://scontent.fnak3-1.fna.fbcdn.net/v/t1.15752-9/530883058_1404902947468707_8561209445283706133_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=or0-IE7J8OIQ7kNvwEbeYnb&_nc_oc=AdnYbl33kWMse--s9dv57bv2MEy24djsGu5MMFbxlyD-J-qPQSaQyNm5OXTdXKMmkTSbGbo4HHPY0BWS0Cn8dPkJ&_nc_zt=23&_nc_ht=scontent.fnak3-1.fna&oh=03_Q7cD3AGG3UNFt8x6wqpDb8nz-BnC-rgOK25swGCRO9lAa94XVA&oe=68D14E20" },
-                { id: 2, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 3, name: "Enzo", price: 20, image: "https://scontent.fnak3-1.fna.fbcdn.net/v/t1.15752-9/537303111_799919185704514_2984764884519614868_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Qz2znefVQAwQ7kNvwFJDTMC&_nc_oc=AdnezUMU86MkKY44QH8yDVFdH2aOGfUQBLmXIfzj0wDNCWAbWk6DsREqLyEQe3NdGNh1y1qqzA8AtkZ1EDHx7Uf7&_nc_zt=23&_nc_ht=scontent.fnak3-1.fna&oh=03_Q7cD3AG1YIJ5YDmnCRVgcIbC_lAUOkGtONaXio7XNH34DxO0Rg&oe=68D13D45" },
-                { id: 4, name: "Unko", price: 0, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 5, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 6, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" }
+                { id: 1, name: "โซฟาหนังสุดหรู", price: 45900, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 2, name: "โต๊ะไม้สไตล์สแกนดิเนเวีย", price: 12900, image: "https://images.unsplash.com/photo-1533090368676-1fd25485db88?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 3, name: "โคมไฟตั้งพื้นดีไซน์โมเดิร์น", price: 5900, image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 4, name: "ชุดตกแต่งผนัง", price: 3200, image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 5, name: "เก้าอี้อ่านหนังสือ", price: 7500, image: "https://images.unsplash.com/photo-1598301257982-0cf01499abb2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 6, name: "ตู้เก็บของมัลติฟังก์ชัน", price: 13900, image: "https://images.unsplash.com/photo-1551298370-9d3d53740c72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" }
             ],
             electronic: [
-                { id: 7, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 8, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 9, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1511389026070-a14ae610a1be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 10, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 11, name: "Unknow Gaming", price: 0, image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                { id: 12, name: "Unknow", price: 0, image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" }
+                { id: 7, name: "หูฟังไร้สาย", price: 6900, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 8, name: "สมาร์ทวอทช์", price: 8900, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 9, name: "ลำโพงบลูทูธ", price: 4500, image: "https://images.unsplash.com/photo-1511389026070-a14ae610a1be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 10, name: "แท็บเล็ต", price: 15900, image: "https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 11, name: "เมาส์เกมมิ่ง", price: 2200, image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+                { id: 12, name: "คีย์บอร์ด mechanical", price: 3900, image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" }
             ]
         };
 
@@ -472,26 +697,30 @@
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: var(--accent-color);
+                bottom: 30px;
+                right: 30px;
+                background: var(--gradient);
                 color: white;
-                padding: 15px 25px;
+                padding: 18px 28px;
                 border-radius: var(--border-radius);
-                box-shadow: var(--shadow);
+                box-shadow: var(--shadow-hover);
                 z-index: 1002;
-                animation: fadeIn 0.3s ease;
+                animation: fadeIn 0.5s ease;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 500;
             `;
-            notification.textContent = message;
+            notification.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
             
             document.body.appendChild(notification);
             
             setTimeout(() => {
-                notification.style.animation = 'fadeOut 0.3s ease forwards';
+                notification.style.animation = 'fadeIn 0.5s ease reverse forwards';
                 setTimeout(() => {
                     document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
+                }, 500);
+            }, 3500);
         }
 
         // สร้างการ์ดสินค้า
@@ -499,16 +728,19 @@
             const productsGrid = document.querySelector(`#${category}ProductsPage .products-grid`);
             productsGrid.innerHTML = '';
             
-            products[category].forEach(product => {
+            products[category].forEach((product, index) => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
+                productCard.style.animationDelay = `${index * 0.1}s`;
                 productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-price">${product.price.toLocaleString()} บาท</p>
-                        <button class="view-details" onclick="showNotification('ระบบสั่งซื้อไม่เปิดให้บริการในขณะนี้')">
-                            <i class="fas fa-info-circle"></i> ดูรายละเอียด
+                        <button class="view-details" onclick="showNotification('${product.name} - ระบบสั่งซื้อไม่เปิดให้บริการในขณะนี้')">
+                            <i class="fas fa-eye"></i> ดูรายละเอียด
                         </button>
                     </div>
                 `;
@@ -532,6 +764,9 @@
                 document.getElementById('homeProductsPage').style.display = 'none';
                 renderProducts('electronic');
             }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // ฟังก์ชันสำหรับกลับไปยังหน้าหมวดหมู่
@@ -542,6 +777,9 @@
             
             // แสดงหน้าหมวดหมู่
             document.getElementById('categoriesSection').style.display = 'flex';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // เพิ่มการทำงานเมื่อคลิกที่หมวดหมู่
@@ -555,6 +793,11 @@
         // กลับไปหน้าหลักเมื่อคลิกที่โลโก้
         document.getElementById('homeLogo').addEventListener('click', function() {
             goBackToCategories();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showNotification('ยินดีต้อนรับสู่ ShopVincent - เว็บไซต์ตัวอย่างแสดงสินค้า');
         });
     </script>
 </body>
